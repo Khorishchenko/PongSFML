@@ -1,0 +1,9 @@
+#include "../inc/pgh.h"
+#include "../inc/GameObject.h"
+
+GameObject::GameObject(float startX, float startY, sf::RenderWindow& window) : m_window(window)
+{
+    position.x = startX;
+    position.y = startY;
+    speed = 0.3f;
+}
