@@ -1,10 +1,10 @@
 #include "../inc/pgh.h"
 
-bool Info(sf::RenderWindow &window) 
+bool Info(sf::RenderWindow &window, const std::vector<std::string> &menuInfo) 
 {
     sf::Texture aboutTexture, returnTexture;
-    aboutTexture.loadFromFile("images/about.png");
-    returnTexture.loadFromFile("images/return.png");
+    aboutTexture.loadFromFile(menuInfo[0]);
+    returnTexture.loadFromFile(menuInfo[1]);
 
     sf::Sprite about(aboutTexture), retur(returnTexture);
     about.setPosition(330, 0);

@@ -81,7 +81,7 @@ void Game::HandleCollision()
     }
 }
 
-void Game::HandleInput(char &keyOne, char &keyTwo, char &keyThree, char &keyFour)
+void Game::HandleInput(char keyOne, char keyTwo, char keyThree, char keyFour)
 {
     player1->HandleInput1(keyOne, keyTwo);
     player2->HandleInput2(keyThree, keyFour);
@@ -116,6 +116,7 @@ void Game::Run()
         sf::Event event;
         while (m_window.pollEvent(event))
         {
+            Down = 'd', Up = 'p'; 
             if (event.type == sf::Event::Closed)
                 m_window.close();
             if (event.type == Event::KeyPressed && event.key.code == sf::Keyboard::P)
@@ -124,13 +125,13 @@ void Game::Run()
                     isPaused = !isPaused;
             }
             if (event.type == Event::KeyPressed && event.key.code == sf::Keyboard::R) {
-                S = 's',W = 'w', Down = 'd', Up = 'p'; 
                 RestartGame();
             }
-            if (event.type == Event::KeyPressed && event.key.code == sf::Keyboard::W) { W = 'W'; S = 's';}
-            if (event.type == Event::KeyPressed && event.key.code == sf::Keyboard::S) { S = 'S'; W = 'w';}
-            if (event.type == Event::KeyPressed && event.key.code == sf::Keyboard::Up) { Up = 'U'; Down = 'd';}
-            if (event.type == Event::KeyPressed && event.key.code == sf::Keyboard::Down) { Down = 'D'; Up = 'p';}
+            if (event.type == Event::KeyPressed && event.key.code == sf::Keyboard::W) { W = 'W';}
+            if (event.type == Event::KeyPressed && event.key.code == sf::Keyboard::S) { S = 'S';}
+            if (event.type == Event::KeyPressed && event.key.code == sf::Keyboard::Up) { Up = 'U';}
+            if (event.type == Event::KeyPressed && event.key.code == sf::Keyboard::Down) { Down = 'D';}
+            if (event.type == Event::KeyPressed && event.key.code == sf::Keyboard::Escape) { m_window.close();}
         }
 
         m_window.clear();

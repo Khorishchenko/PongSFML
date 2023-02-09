@@ -1,7 +1,7 @@
 #include "../inc/pgh.h"
 #include "../inc/Ball.h"
 
-Ball::Ball(float startX, float startY, RenderWindow& window) : GameObject(startX, startY, window)
+Ball::Ball(float startX, float startY, RenderWindow& window, float speed) : GameObject(startX, startY, window, speed)
 {
     ballShape.setRadius(radius);
     ballShape.setPosition(position);
@@ -44,7 +44,7 @@ void Ball::reboundBat()
 
 void Ball::Update()
 {
-    ballShape.move(std::cos(ballAngle) * (speed - 0.1), std::sin(ballAngle) * (speed - 0.1));
+    ballShape.move(std::cos(ballAngle) * (Speed.getSpeed() - 0.1), std::sin(ballAngle) * (Speed.getSpeed() - 0.1));
 }
 
 void Ball::Draw()

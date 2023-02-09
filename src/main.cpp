@@ -1,5 +1,12 @@
 #include "../inc/pgh.h"
 
+
+enum mainMenu
+{
+    start = 1,
+    info
+};
+
 int main(void) 
 {
 	// Устанавливаем 8-й уровень сглаживания
@@ -9,13 +16,19 @@ int main(void)
 	// Объект, который, собственно, является главным окном приложения
 	sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "PONG GAME", sf::Style::Default, settings);
 		
+    std::vector<std::string> mainMenu{"images/111.png", "images/222.png", "images/333.png", "images/pingPong.png"};
+    std::vector<std::string> menuStart{"images/444.png", "images/555.png", "images/return.png"};
+    std::vector<std::string> menuInfo{"images/about.png", "images/return.png"};
+
+    std::map<std::string, std::string> gameMusic;
+    gameMusic["mainMusic"] = "sound/a_hero.ogg";
 
 	// Главный цикл приложения: выполняется, пока открыто окно
     while (window.isOpen())
     {
         // музыкальное сопровождение
         sf::Music music;
-        music.openFromFile("sound/a_hero.ogg");
+        music.openFromFile(gameMusic["mainMusic"]);
         music.play();
         music.setLoop(true);
 
@@ -30,21 +43,19 @@ int main(void)
 
         bool state = false;
         do {
-            switch (Menu(window))
+            switch (Menu(window, mainMenu))
             {
                 case 1:
-                    state = Start(window);
+                    state = Start(window, menuStart);
                     break;
                 case 2:
-                    state = Info(window);
+                    state = Info(window, menuInfo);
                     break;
                 case 3:
                     state = false;
                     window.close();
             }
         } while (state);
-
-        window.clear(sf::Color(100, 100, 100, 0));
 
 		// Отрисовка окна
         window.display();

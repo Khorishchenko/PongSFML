@@ -1,12 +1,12 @@
 #include "../inc/pgh.h"
 
-int Menu(sf::RenderWindow &window) 
+int Menu(sf::RenderWindow &window, const std::vector<std::string>& mainMenu) 
 {
 	sf::Texture menuTextureOne, menuTextureTwo, menuTextureThree, menuBackground;
-	menuTextureOne.loadFromFile("images/111.png");
-	menuTextureTwo.loadFromFile("images/222.png");
-	menuTextureThree.loadFromFile("images/333.png");
-	menuBackground.loadFromFile("images/pingPong.png");
+	menuTextureOne.loadFromFile(mainMenu[0]);
+	menuTextureTwo.loadFromFile(mainMenu[1]);
+	menuTextureThree.loadFromFile(mainMenu[2]);
+	menuBackground.loadFromFile(mainMenu[3]);
 
 	sf::Sprite menuOne(menuTextureOne), menuTwo(menuTextureTwo), menuThree(menuTextureThree), menuBg(menuBackground);
 	menuOne.setPosition(60, 30);

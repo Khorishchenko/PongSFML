@@ -1,7 +1,7 @@
 #include "../inc/pgh.h"
 #include "../inc/Paddle.h"
 
-Paddle::Paddle(float startX, float startY, RenderWindow& window) : GameObject(startX, startY, window)
+Paddle::Paddle(float startX, float startY, RenderWindow& window) : GameObject(startX, startY, window, 0.0f)
 {
     paddleShape.setSize(sf::Vector2f(shapeWidth, shapeHeight));
     paddleShape.setPosition(position);
@@ -27,8 +27,9 @@ void Paddle::moveDown()
     position.y += speed;
 }
 
-void Paddle::HandleInput1(char &keyOne, char &keyTwo)
+void Paddle::HandleInput1(char keyOne, char keyTwo)
 {
+    std::cout << keyOne << "  " << keyTwo << std::endl;
     if (keyOne == 'W' && (paddleShape.getPosition().y - paddleShape.getSize().y / 2 > -20.0f))
     {
         paddleShape.move(0.f, -speed);
@@ -41,6 +42,7 @@ void Paddle::HandleInput1(char &keyOne, char &keyTwo)
 
 void Paddle::HandleInput2(char &keyThree, char &keyFour)
 {
+     std::cout << keyThree << "  " << keyFour << std::endl;
     if (keyThree == 'U' && (paddleShape.getPosition().y - paddleShape.getSize().y / 2 > -20.0f))
     {
         paddleShape.move(0.f, -speed);

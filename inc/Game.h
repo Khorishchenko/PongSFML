@@ -27,7 +27,7 @@ public:
     RenderWindow& GetWindow();
     void RestartGame();
     void HandleCollision();
-    void HandleInput(char &keyOne, char &keyTwo, char &keyThree, char &keyFour);
+    void HandleInput(char keyOne, char keyTwo, char keyThree, char keyFour);
     void Update();
     void Draw();
     void Run();

@@ -17,7 +17,7 @@ public:
     RectangleShape getShape();
     void moveUp();
     void moveDown();
-    void HandleInput1(char &keyOne, char &keyTwo);
+    void HandleInput1(char keyOne, char keyTwo);
     void HandleInput2(char &keyThree, char &keyFour);
     void Update() override;
     void Draw() override;
