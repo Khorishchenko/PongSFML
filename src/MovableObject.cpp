@@ -4,6 +4,7 @@
 MovableObject::MovableObject(float speed) : m_speed(speed)
 {
 }
+
 void MovableObject::setSpeed(float speed) 
 {
     m_speed = speed;

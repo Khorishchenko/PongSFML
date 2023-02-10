@@ -1,7 +1,7 @@
 #include "../inc/pgh.h"
 #include "../inc/Paddle.h"
 
-Paddle::Paddle(float startX, float startY, RenderWindow& window) : GameObject(startX, startY, window, 0.0f)
+Paddle::Paddle(float startX, float startY, RenderWindow& window, float speed) : GameObject(startX, startY, window, speed)
 {
     paddleShape.setSize(sf::Vector2f(shapeWidth, shapeHeight));
     paddleShape.setPosition(position);
@@ -19,37 +19,50 @@ RectangleShape Paddle::getShape()
 
 void Paddle::moveUp()
 {
-    position.y -= speed;
+    position.y -= Speed.getSpeed();
 }
 
 void Paddle::moveDown()
 {
-    position.y += speed;
+    position.y += Speed.getSpeed();
 }
 
-void Paddle::HandleInput1(char keyOne, char keyTwo)
+void Paddle::HandleInput1(char keyW, char keyS)
 {
-    std::cout << keyOne << "  " << keyTwo << std::endl;
-    if (keyOne == 'W' && (paddleShape.getPosition().y - paddleShape.getSize().y / 2 > -20.0f))
+    // std::cout << event.key.code << std::endl;
+    // if ((event.type == Event::KeyPressed && event.key.code == 22)
+    //     && (paddleShape.getPosition().y - paddleShape.getSize().y / 2 > -20.0f))
+    // {
+    //     paddleShape.move(0.f, -Speed.getSpeed());
+    // }
+    // else if ((event.type == Event::KeyPressed && event.key.code == 18)
+    //     && (paddleShape.getPosition().y + paddleShape.getSize().y / 2 < m_window.getSize().y - 35.f))
+    // {
+    //     paddleShape.move(0.f, Speed.getSpeed());
+    // }
+
+    
+    if (keyW == 'W' && (paddleShape.getPosition().y - paddleShape.getSize().y / 2 > -20.0f))
     {
-        paddleShape.move(0.f, -speed);
+        paddleShape.move(0.f, -Speed.getSpeed());
     }
-    else if (keyTwo == 'S' && (paddleShape.getPosition().y + paddleShape.getSize().y / 2 < m_window.getSize().y - 35.f))
+    if (keyS == 'S' && (paddleShape.getPosition().y + paddleShape.getSize().y / 2 < m_window.getSize().y - 35.f))
     {
-        paddleShape.move(0.f, speed);
+        paddleShape.move(0.f, Speed.getSpeed());
     }
 }
 
-void Paddle::HandleInput2(char &keyThree, char &keyFour)
+void Paddle::HandleInput2(sf::Event &event)
 {
-     std::cout << keyThree << "  " << keyFour << std::endl;
-    if (keyThree == 'U' && (paddleShape.getPosition().y - paddleShape.getSize().y / 2 > -20.0f))
+    if ((event.type == Event::KeyPressed && event.key.code == sf::Keyboard::Up) 
+        && (paddleShape.getPosition().y - paddleShape.getSize().y / 2 > -20.0f))
     {
-        paddleShape.move(0.f, -speed);
+        paddleShape.move(0.f, -Speed.getSpeed());
     }
-    else if (keyFour == 'D' && (paddleShape.getPosition().y + paddleShape.getSize().y / 2 < m_window.getSize().y - 35.f))
+    else if ((event.type == Event::KeyPressed && event.key.code == sf::Keyboard::Down)
+        && (paddleShape.getPosition().y + paddleShape.getSize().y / 2 < m_window.getSize().y - 35.f))
     {
-        paddleShape.move(0.f, speed);
+        paddleShape.move(0.f, Speed.getSpeed());
     }
 }
 

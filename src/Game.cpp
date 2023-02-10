@@ -65,26 +65,38 @@ void Game::HandleCollision()
     }
     else if (ball->getPosition().intersects(player2->getPosition()))
     {
-        if (ball->getShape().getPosition().y > player2->getShape().getPosition().y)
+        if (ball->getShape().getPosition().y > player2->getShape().getPosition().y) 
+        {
             ball->ballAngle = ball->pi - ball->ballAngle + (std::rand() % 20) * ball->pi / 180;
+            ball->speedIncrease(ball->speedIncrease() + 0.1f);
+        }
         else
+        {
             ball->ballAngle = ball->pi - ball->ballAngle - (std::rand() % 20) * ball->pi / 180;
+            ball->speedIncrease(ball->speedIncrease() + 0.1f);
+        }
         ball->getShape().setPosition(player2->getShape().getPosition().x - ball->getRadius() - player2->getShape().getSize().x / 2 - 0.1f, ball->getShape().getPosition().y);
     }
     else if (ball->getPosition().intersects(player1->getPosition()))
     {
         if (ball->getShape().getPosition().y > player1->getShape().getPosition().y)
+        {
             ball->ballAngle = ball->pi - ball->ballAngle + (std::rand() % 20) * ball->pi / 180;
+            ball->speedIncrease(ball->speedIncrease() + 0.1f);
+        }
         else
+        {
             ball->ballAngle = ball->pi - ball->ballAngle - (std::rand() % 20) * ball->pi / 180;
+            ball->speedIncrease(ball->speedIncrease() + 0.1f);
+        }
         ball->getShape().setPosition(player1->getShape().getPosition().x - ball->getRadius() - player1->getShape().getSize().x / 2 - 0.1f, ball->getShape().getPosition().y);
     }
 }
 
-void Game::HandleInput(char keyOne, char keyTwo, char keyThree, char keyFour)
+void Game::HandleInput(sf::Event &event, char keyW, char keyS)
 {
-    player1->HandleInput1(keyOne, keyTwo);
-    player2->HandleInput2(keyThree, keyFour);
+    player1->HandleInput1(keyW, keyS);
+    player2->HandleInput2(event);
 }
 
 void Game::Update()
@@ -108,15 +120,14 @@ void Game::Run()
 {
     char W;
     char S;
-    char Up;
-    char Down;
+
     //Game Loop
     while (m_window.isOpen())
     {
+        
         sf::Event event;
         while (m_window.pollEvent(event))
         {
-            Down = 'd', Up = 'p'; 
             if (event.type == sf::Event::Closed)
                 m_window.close();
             if (event.type == Event::KeyPressed && event.key.code == sf::Keyboard::P)
@@ -127,10 +138,8 @@ void Game::Run()
             if (event.type == Event::KeyPressed && event.key.code == sf::Keyboard::R) {
                 RestartGame();
             }
-            if (event.type == Event::KeyPressed && event.key.code == sf::Keyboard::W) { W = 'W';}
-            if (event.type == Event::KeyPressed && event.key.code == sf::Keyboard::S) { S = 'S';}
-            if (event.type == Event::KeyPressed && event.key.code == sf::Keyboard::Up) { Up = 'U';}
-            if (event.type == Event::KeyPressed && event.key.code == sf::Keyboard::Down) { Down = 'D';}
+            if (event.type == Event::KeyPressed && event.key.code == sf::Keyboard::W) { W = 'W', S = 's';}
+            if (event.type == Event::KeyPressed && event.key.code == sf::Keyboard::S) { S = 'S', W = 'w';}
             if (event.type == Event::KeyPressed && event.key.code == sf::Keyboard::Escape) { m_window.close();}
         }
 
@@ -139,7 +148,7 @@ void Game::Run()
 
         if (!isPaused)
         {
-            HandleInput(W, S, Up, Down);
+            HandleInput(event, W, S);
             Update();
         }
         if (isPaused)

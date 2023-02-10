@@ -27,7 +27,7 @@ public:
     RenderWindow& GetWindow();
     void RestartGame();
     void HandleCollision();
-    void HandleInput(char keyOne, char keyTwo, char keyThree, char keyFour);
+    void HandleInput(sf::Event &event, char keyW, char keyS);
     void Update();
     void Draw();
     void Run();

@@ -1,5 +1,6 @@
 #include "../inc/pgh.h"
 #include "../inc/Ball.h"
+#include "Ball.h"
 
 Ball::Ball(float startX, float startY, RenderWindow& window, float speed) : GameObject(startX, startY, window, speed)
 {
@@ -42,6 +43,12 @@ void Ball::reboundBat()
 {
 }
 
+float Ball::speedIncrease(float increment)
+{
+    if (increment > 0.0f)
+        Speed.setSpeed(increment);
+    return Speed.getSpeed();   
+}
 void Ball::Update()
 {
     ballShape.move(std::cos(ballAngle) * (Speed.getSpeed() - 0.1), std::sin(ballAngle) * (Speed.getSpeed() - 0.1));

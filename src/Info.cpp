@@ -2,42 +2,14 @@
 
 bool Info(sf::RenderWindow &window, const std::vector<std::string> &menuInfo) 
 {
-    sf::Texture aboutTexture, returnTexture;
-    aboutTexture.loadFromFile(menuInfo[0]);
-    returnTexture.loadFromFile(menuInfo[1]);
-
-    sf::Sprite about(aboutTexture), retur(returnTexture);
-    about.setPosition(330, 0);
-    retur.setPosition(30, 600);
-
-    bool isMenu = true;
-    bool state = false;
-    int  menuNum = 0;
-
-    while(isMenu) 
-    {
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-                window.close();
-        }
-        window.clear(sf::Color(129, 181, 221));
-
-        retur.setColor(sf::Color::White);
-        if (sf::IntRect(30, 600, 300, 50).contains(sf::Mouse::getPosition(window))) { retur.setColor(sf::Color::Blue); menuNum = 1; }
+    std::vector<sf::Texture> infoTexture{sf::Texture(), sf::Texture()};
+    infoTexture[0].loadFromFile(menuInfo[0]);
+    infoTexture[1].loadFromFile(menuInfo[1]);
 
 
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-		{
-			if (menuNum == 1) { isMenu = false; state = true;}
- 
-		}
- 
-        window.draw(about);
-		window.draw(retur);
-		
-		window.display();
-    }
-    return state;
+    std::vector<sf::Sprite> sprites{sf::Sprite(infoTexture[0]), sf::Sprite(infoTexture[1])};
+    sprites[0].setPosition(330, 0);
+    sprites[1].setPosition(30, 600);
+
+    return IsMenu(window, sprites, "info");
 }

@@ -9,7 +9,6 @@ class GameObject
 {
 protected:
     Vector2f position;
-    float speed;
     MovableObject Speed;
     RenderWindow& m_window;
 public:

@@ -2,54 +2,16 @@
 
 bool Start(sf::RenderWindow &window, const std::vector<std::string> &menuStart) 
 {
-	sf::Texture menuTextureOne, menuTextureTwo, menuTextureThree;
-	menuTextureOne.loadFromFile(menuStart[0]);
-	menuTextureTwo.loadFromFile(menuStart[1]);
-	menuTextureThree.loadFromFile(menuStart[2]);
+	std::vector<sf::Texture> startTexture{sf::Texture(), sf::Texture(), sf::Texture()};
+	startTexture[0].loadFromFile(menuStart[0]);
+	startTexture[1].loadFromFile(menuStart[1]);
+	startTexture[2].loadFromFile(menuStart[2]);
 
-	sf::Sprite menuOne(menuTextureOne), menuTwo(menuTextureTwo), menuThree(menuTextureThree);
 
-	menuOne.setPosition(300, 30);
-	menuTwo.setPosition(300, 220);
-	menuThree.setPosition(300, 400);
+	std::vector<sf::Sprite> sprites{sf::Sprite(startTexture[0]), sf::Sprite(startTexture[0]), sf::Sprite(startTexture[2])};
+	sprites[0].setPosition(300, 30);
+	sprites[1].setPosition(300, 220);
+	sprites[2].setPosition(300, 400);
 
-	bool isMenu = true;
-	bool state = false;
-	int  menuNum = 0;
-
-	while (isMenu)
-	{
-		sf::Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-                window.close();
-        }
-
-		menuOne.setColor(sf::Color::White);
-		menuTwo.setColor(sf::Color::White);
-		menuThree.setColor(sf::Color::White);
-
-		menuNum = 0;
-		window.clear(sf::Color(129, 181, 221));
- 
-		if (sf::IntRect(200, 30, 300, 50).contains(sf::Mouse::getPosition(window))) { menuOne.setColor(sf::Color::Blue); menuNum = 1; }
-		if (sf::IntRect(200, 220, 300, 50).contains(sf::Mouse::getPosition(window))) { menuTwo.setColor(sf::Color::Blue); menuNum = 2; }
-		if (sf::IntRect(200, 400, 300, 50).contains(sf::Mouse::getPosition(window))) { menuThree.setColor(sf::Color::Blue); menuNum = 3; }
- 
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-		{
-			if (menuNum == 1) { Games(window); isMenu = false; state = false;} 
-			if (menuNum == 2) { }
-			if (menuNum == 3) { isMenu = false; state = true; }
-		}
- 
-		window.draw(menuOne);
-		window.draw(menuTwo);
-		window.draw(menuThree);
-		
-		window.display();
-	}
-	
-	return state;
+	return IsMenu(window, sprites, "start");
 }

@@ -5,6 +5,5 @@ GameObject::GameObject(float startX, float startY, sf::RenderWindow& window, flo
 {
     position.x = startX;
     position.y = startY;
-    this->speed = 0.7f;
     Speed.setSpeed(speed);
 }

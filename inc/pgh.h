@@ -17,6 +17,7 @@
 #include <algorithm>
 #include <string>
 #include <map>
+#include <vector>
 
 #ifdef SFML_SYSTEM_IOS
 #include <SFML/Main.hpp>
@@ -27,6 +28,7 @@ using namespace sf;
 bool Start(sf::RenderWindow &window, const std::vector<std::string> &menuStart);
 int  Menu(sf::RenderWindow &window, const std::vector<std::string>& mainMenu);
 bool Info(sf::RenderWindow &window, const std::vector<std::string> &menuInfo);
+int IsMenu(sf::RenderWindow &window, std::vector<sf::Sprite> &sprites, std::string nameMenu);
 void Games(sf::RenderWindow &window);
 
 // static int windowWidth = 1000;
